@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script type="text/javascript">
+    	function calculateChooseForWin() {
+    		const MAX_CHOOSE = 100;
+    		const countLoop = 1;		
+			for(let choose = 1; choose < MAX_CHOOSE; choose++) {
+				let history = [];
+				let bankHistory = []
+				for(let count = 0; count < countLoop; count++) {
+    				let bank = 0;
+    				let rate = 1;
+	    			let isWin = false;
+	    			let i = 1;
+    				while(isWin) {
+    					bank += rate;
+	    				let randomNumber = Math.floor(Math.random() * MAX_CHOOSE);
+	    				if(randomNumber <= choose) {
+	    					history.push(i);
+	    					bankHistory.push(bank)
+	    					isWin = true;
+	    				}
+	    				rate *= 2;
+	    				i++;
+	    			}
+				}
+				console.log(history)
+				// document.write('Count: ' + getAvg(history));
+    // 			document.write('<br/>');
+    // 			document.write('Bank: ' + getAvg(bankHistory) + '$');
+    // 			document.write('<br/>');
+    // 			document.write('Choose: ' + choose + '%');
+    // 			document.write('<br/>');
+    // 			document.write('<br/>');
+    // 			document.write('<br/>');
+    		}
+    	
+    	};
+		function getAvg(array) {
+			// console.log(array)
+		  var sum = 0;
+          for (var i = 0; i < array.length; i++ ) sum += array[i];
+          return sum / array.length;
+		}
+
+    </script>
+</head>
+<body onload="calculateChooseForWin()">
+
+</body>
+</html>
