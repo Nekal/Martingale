@@ -1,5 +1,5 @@
 class Test
 {
-  a: 12,
+  a: 5,
   b: 6,
 }
