@@ -5,47 +5,56 @@
     <title>Title</title>
 
     <script type="text/javascript">
-    	function calculateChooseForWin() {
-    		const MAX_CHOOSE = 100;
-    		const countLoop = 1;		
-			for(let choose = 1; choose < MAX_CHOOSE; choose++) {
-				let history = [];
-				let bankHistory = []
-				for(let count = 0; count < countLoop; count++) {
-    				let bank = 0;
-    				let rate = 1;
-	    			let isWin = false;
-	    			let i = 1;
-    				while(isWin) {
-    					bank += rate;
-	    				let randomNumber = Math.floor(Math.random() * MAX_CHOOSE);
-	    				if(randomNumber <= choose) {
-	    					history.push(i);
-	    					bankHistory.push(bank)
-	    					isWin = true;
-	    				}
-	    				rate *= 2;
-	    				i++;
-	    			}
-				}
-				console.log(history)
-				// document.write('Count: ' + getAvg(history));
-    // 			document.write('<br/>');
-    // 			document.write('Bank: ' + getAvg(bankHistory) + '$');
-    // 			document.write('<br/>');
-    // 			document.write('Choose: ' + choose + '%');
-    // 			document.write('<br/>');
-    // 			document.write('<br/>');
-    // 			document.write('<br/>');
-    		}
-    	
-    	};
-		function getAvg(array) {
-			// console.log(array)
-		  var sum = 0;
-          for (var i = 0; i < array.length; i++ ) sum += array[i];
-          return sum / array.length;
-		}
+        function calculateChooseForWin() {
+            const MAX_CHOOSE = 100;
+            const countLoop = 10000;
+            for (let choose = 1; choose < MAX_CHOOSE + 1; choose++) {
+                let mainHistory = [];
+                let mainBankHistory = [];
+                let mainPrizeHistory = [];
+                for (let count = 0; count < countLoop; count++) {
+                    let history = [];
+                    let bankHistory = [];
+                    let prizeHistory = [];
+                    let bank = 0;
+                    let rate = 1;
+                    let isWin = false;
+                    let i = 1;
+                    while (!isWin) {
+                        let randomNumber = Math.floor(Math.random() * MAX_CHOOSE);
+                        if (randomNumber < choose) {
+                            history.push(i);
+                            bankHistory.push(bank + rate);
+                            prizeHistory.push(rate - bank);
+                            isWin = true;
+                        }
+                        bank += rate;
+                        rate *= 2;
+                        i++;
+                    }
+                    mainHistory.push(getAvg(history));
+                    console.log(bankHistory)
+                    mainBankHistory.push(getAvg(bankHistory));
+                    mainPrizeHistory.push(getAvg(prizeHistory))
+                }
+                document.write('Count: ' + getAvg(mainHistory));
+                document.write('<br/>');
+                document.write('Bank: ' + getAvg(mainBankHistory) + '$');
+                document.write('<br/>');
+                document.write('Prize: ' + getAvg(mainPrizeHistory) + '$');
+                document.write('<br/>');
+                document.write('Choose: ' + choose + '%');
+                document.write('<br/>');
+                document.write('<br/>');
+                document.write('<br/>');
+            }
+        }
+
+        function getAvg(array) {
+            let sum = 0;
+            for (let i = 0; i < array.length; i++) sum += array[i];
+            return sum / array.length;
+        }
 
     </script>
 </head>
